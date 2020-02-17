@@ -1,0 +1,6 @@
+[Unit]
+After=multi-user.target
+
+[Timer]
+OnCalendar={{ systemd_timer_frequency }}
+Persistent=yes

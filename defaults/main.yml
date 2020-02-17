@@ -1,0 +1,13 @@
+---
+systemd_timer_name: ~
+systemd_timer_script_path: '/usr/local/bin/{{ systemd_timer_name | mandatory }}'
+systemd_timer_script_content: ~
+systemd_timer_user: 'nobody'
+systemd_timer_requires: 'multi-user.target'
+systemd_timer_requires_extra: ~
+systemd_timer_type: 'oneshot'
+systemd_timer_description: 'Timer creates by Ansible role.'
+systemd_timer_timeout_sec: 60
+systemd_timer_frequency: 'daily'
+# Options: minutely, hourly, daily, monthly, weekly, yearly
+# https://www.freedesktop.org/software/systemd/man/systemd.time.html
