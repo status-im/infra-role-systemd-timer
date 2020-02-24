@@ -1,7 +1,7 @@
 ---
 systemd_timer_name: ~
-systemd_timer_script_path: '/usr/local/bin/{{ systemd_timer_name | mandatory }}'
 systemd_timer_script_content: ~
+systemd_timer_script_path: '/usr/local/bin/{{ systemd_timer_name | mandatory }}'
 systemd_timer_user: 'nobody'
 systemd_timer_requires: 'multi-user.target'
 systemd_timer_requires_extra: ~

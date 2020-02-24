@@ -4,7 +4,18 @@
     dest: '{{ systemd_timer_script_path }}'
     content: '{{ systemd_timer_script_content }}'
     group: adm
-    mode: 0750
+    mode: 0755
+  when: systemd_timer_script_content is not none
+
+- name: '{{ systemd_timer_name }} Timer | Stat script file'
+  stat:
+    path: '{{ systemd_timer_script_path }}'
+  register: systemd_timer_script
+
+- name: '{{ systemd_timer_name }} Timer | Verify script exists'
+  assert:
+    that: systemd_timer_script.stat.exists
+    fail_msg: 'Script file for timer does not exist!'
 
 - name: '{{ systemd_timer_name }} Timer | Create service file'
   template:
