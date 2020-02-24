@@ -37,6 +37,7 @@
     name: '{{ systemd_timer_name }}.service'
     state: started
     enabled: true
+  when: systemd_timer_start_on_creation
 
 - name: '{{ systemd_timer_name }} Timer | Enable the timer'
   systemd:

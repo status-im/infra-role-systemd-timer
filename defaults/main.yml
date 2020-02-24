@@ -7,6 +7,7 @@ systemd_timer_requires: 'multi-user.target'
 systemd_timer_requires_extra: ~
 systemd_timer_type: 'oneshot'
 systemd_timer_description: 'Timer creates by Ansible role.'
+systemd_timer_start_on_creation: true
 systemd_timer_timeout_sec: 60
 systemd_timer_frequency: 'daily'
 # Options: minutely, hourly, daily, monthly, weekly, yearly
