@@ -11,6 +11,7 @@ systemd_timer_user: 'root'
 systemd_timer_frequency: 'hourly'
 systemd_timer_timeout_sec: 120
 systemd_timer_requires_extra: 'network.target'
+systemd_timer_work_dir: '/tmp/somedir'
 systemd_timer_script_content: |
   #!/usr/bin/env bash
   echo "My Timer Script!"
