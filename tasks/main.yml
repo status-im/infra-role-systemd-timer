@@ -20,13 +20,13 @@
 - name: '{{ systemd_timer_name }} Timer | Create service file'
   template:
     src: 'main.service.j2'
-    dest: '/lib/systemd/system/{{ systemd_timer_name }}.service'
+    dest: '{{ systemd_timer_service_path }}/{{ systemd_timer_name }}.service'
     mode: 0644
 
 - name: '{{ systemd_timer_name }} Timer | Create timer file'
   template:
     src: 'main.timer.j2'
-    dest: '/lib/systemd/system/{{ systemd_timer_name }}.timer'
+    dest: '{{ systemd_timer_service_path }}/{{ systemd_timer_name }}.timer'
     mode: 0644
 
 - name: '{{ systemd_timer_name }} Timer | Reload systemctl'
