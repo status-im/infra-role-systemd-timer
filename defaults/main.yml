@@ -15,3 +15,5 @@ systemd_timer_work_dir: '/'
 # Options: minutely, hourly, daily, monthly, weekly, yearly
 # https://www.freedesktop.org/software/systemd/man/systemd.time.html
 systemd_timer_frequency: 'daily'
+systemd_timer_environment: {}
+# PATH: "/special/path"

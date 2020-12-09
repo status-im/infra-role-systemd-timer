@@ -13,3 +13,6 @@ Type={{ systemd_timer_type }}
 ExecStart={{ systemd_timer_script_path }}
 TimeoutStartSec={{ systemd_timer_timeout_sec }}
 WorkingDirectory={{ systemd_timer_work_dir }}
+{% for key, val in systemd_timer_environment.items() %}
+Environment="{{ key }}={{ val }}"
+{% endfor %}
