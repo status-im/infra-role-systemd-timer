@@ -10,6 +10,9 @@ After={{ systemd_timer_requires_extra }}
 [Service]
 User={{ systemd_timer_user }}
 Type={{ systemd_timer_type }}
+Nice={{ systemd_timer_nice_priority }}
+IOSchedulingClass={{ systemd_timer_ionice_class }}
+IOSchedulingPriority={{ systemd_timer_ionice_priority }}
 ExecStart={{ systemd_timer_script_path }}
 TimeoutStartSec={{ systemd_timer_timeout_sec }}
 WorkingDirectory={{ systemd_timer_work_dir }}
