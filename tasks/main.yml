@@ -22,12 +22,16 @@
   template:
     src: 'main.service.j2'
     dest: '{{ systemd_timer_service_path }}/{{ systemd_timer_name }}.service'
+    owner: '{{ systemd_timer_service_owner }}'
+    group: '{{ systemd_timer_service_group }}'
     mode: 0644
 
 - name: '{{ systemd_timer_name }} Timer | Create timer file'
   template:
     src: 'main.timer.j2'
     dest: '{{ systemd_timer_service_path }}/{{ systemd_timer_name }}.timer'
+    owner: '{{ systemd_timer_service_owner }}'
+    group: '{{ systemd_timer_service_group }}'
     mode: 0644
 
 - name: '{{ systemd_timer_name }} Timer | Reload systemctl'
