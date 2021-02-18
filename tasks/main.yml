@@ -24,7 +24,7 @@
     dest: '{{ systemd_timer_service_path }}/{{ systemd_timer_name }}.service'
     owner: '{{ systemd_timer_service_owner }}'
     group: '{{ systemd_timer_service_group }}'
-    mode: 0644
+    mode: 0640
 
 - name: '{{ systemd_timer_name }} Timer | Create timer file'
   template:
@@ -32,7 +32,7 @@
     dest: '{{ systemd_timer_service_path }}/{{ systemd_timer_name }}.timer'
     owner: '{{ systemd_timer_service_owner }}'
     group: '{{ systemd_timer_service_group }}'
-    mode: 0644
+    mode: 0640
 
 - name: '{{ systemd_timer_name }} Timer | Reload systemctl'
   command: systemctl daemon-reload
