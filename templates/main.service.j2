@@ -13,9 +13,10 @@ Type={{ systemd_timer_type }}
 Nice={{ systemd_timer_nice_priority }}
 IOSchedulingClass={{ systemd_timer_ionice_class }}
 IOSchedulingPriority={{ systemd_timer_ionice_priority }}
-ExecStart={{ systemd_timer_script_path }}
+ExecStart={{ systemd_timer_script_path }} {{ systemd_timer_script_args }}
 TimeoutStartSec={{ systemd_timer_timeout_sec }}
 WorkingDirectory={{ systemd_timer_work_dir }}
+
 {% for key, val in systemd_timer_environment.items() %}
 Environment="{{ key }}={{ val }}"
 {% endfor %}
