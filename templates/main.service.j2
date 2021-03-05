@@ -20,3 +20,6 @@ WorkingDirectory={{ systemd_timer_work_dir }}
 {% for key, val in systemd_timer_environment.items() %}
 Environment="{{ key }}={{ val }}"
 {% endfor %}
+
+[Install]
+WantedBy=timers.target
