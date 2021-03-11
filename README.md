@@ -12,6 +12,7 @@ systemd_timer_frequency: 'hourly'
 systemd_timer_timeout_sec: 120
 systemd_timer_nice_priority: 10
 systemd_timer_requires_extra: 'network.target'
+systemd_timer_after_extra: 'network.target'
 systemd_timer_work_dir: '/tmp/somedir'
 systemd_timer_environment:
   MY_ENV_VAR: 'some_value'
