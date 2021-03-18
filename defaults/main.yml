@@ -7,6 +7,7 @@ systemd_timer_service_path: '/etc/systemd/system'
 systemd_timer_service_owner: 'root'
 systemd_timer_service_group: 'root'
 systemd_timer_user: 'nobody'
+systemd_timer_group: '{{ systemd_timer_user }}'
 systemd_timer_requires: 'multi-user.target'
 #systemd_timer_requires_extra:
 #systemd_timer_after_extra:
