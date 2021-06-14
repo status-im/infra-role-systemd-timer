@@ -2,4 +2,3 @@
 - import_tasks: script.yml
 - import_tasks: timer.yml
 - import_tasks: check.yml
-  when: systemd_timer_consul_enabled

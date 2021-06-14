@@ -23,6 +23,15 @@ systemd_timer_script_content: |
 
 The `frequency` accepts [systemd time specification](https://www.freedesktop.org/software/systemd/man/systemd.time.html#) format.
 
+You can also customize the Consul service definition:
+```
+systemd_timer_consul_service_id: 'my-test-abc'
+systemd_timer_consul_service_name: 'my-test'
+systemd_timer_consul_extra_tags: ['test', 'abc']
+systemd_timer_consul_meta: { my_meta: 'metadata' }
+```
+The service runs the [`check.sh`](templates/check.sh.j2) script to verify timer health..
+
 # Usage
 
 The the timer starts the service with configured frequency.
