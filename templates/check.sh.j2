@@ -25,5 +25,5 @@ if [[ ${TIMER_STATUS} != "ACTIVE" ]] ||
     list-timer "${NAME}.timer"
     echo
     status "${NAME}.service"
-    exit 2
+    exit {{ systemd_timer_consul_warning | ternary(1, 2) }}
 fi

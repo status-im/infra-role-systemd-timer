@@ -32,6 +32,7 @@ systemd_timer_consul_service_name: '{{ systemd_timer_name }}-timer'
 systemd_timer_consul_service_id: '{{ systemd_timer_consul_service_name }}'
 systemd_timer_consul_check_path: '/usr/local/bin/check-timer-status.sh'
 systemd_timer_consul_address: '{{ ansible_local.wireguard.vpn_ip }}'
+systemd_timer_consul_warning: false
 systemd_timer_consul_default_tags: ['timer']
 systemd_timer_consul_extra_tags: []
 systemd_timer_consul_tags: '{{ systemd_timer_consul_default_tags + systemd_timer_consul_extra_tags }}'
