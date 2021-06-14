@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# vim: ft=bash
+
+NAME="${1}"
+if [[ -z "${NAME}" ]]; then
+    echo "No timer name provided!"
+    exit 1
+fi
+
+function is-active() { systemctl is-active $@ > /dev/null; }
+function is-failed() { systemctl is-failed $@ > /dev/null; }
+function list-timer() { systemctl --no-pager -q -all list-timers $@; }
+function status() { systemctl --no-pager -q status $@; }
+
+TIMER_STATUS=$(is-active ${NAME}.timer && echo "ACTIVE" || echo "DISABLED")
+TIMER_HEALTH=$(is-failed ${NAME}.timer && echo "BROKEN" || echo "HEALTHY")
+SERVICE_HEALTH=$(is-failed ${NAME}.service && echo "FAILED" || echo "RUNNING")
+
+echo "${NAME}.timer: ${TIMER_STATUS}, ${TIMER_HEALTH}, and ${SERVICE_HEALTH}"
+
+if [[ ${TIMER_STATUS} != "ACTIVE" ]] ||
+   [[ "${TIMER_HEALTH}" != "HEALTHY" ]] || 
+   [[ "${SERVICE_HEALTH}" != "RUNNING" ]] ;then
+    echo
+    list-timer "${NAME}.timer"
+    echo
+    status "${NAME}.service"
+    exit 2
+fi

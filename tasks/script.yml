@@ -1,0 +1,19 @@
+---
+- name: '{{ systemd_timer_name }} Timer | Create script file' 
+  copy:
+    dest: '{{ systemd_timer_script_path }}'
+    content: '{{ systemd_timer_script_content }}'
+    owner: '{{ systemd_timer_user }}'
+    group: adm
+    mode: 0710
+  when: systemd_timer_script_content is not none
+
+- name: '{{ systemd_timer_name }} Timer | Stat script file'
+  stat:
+    path: '{{ systemd_timer_script_path }}'
+  register: systemd_timer_script
+
+- name: '{{ systemd_timer_name }} Timer | Verify script exists'
+  assert:
+    that: systemd_timer_script.stat.exists
+    fail_msg: 'Script file for timer does not exist!'

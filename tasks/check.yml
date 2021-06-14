@@ -1,0 +1,22 @@
+---
+- name: '{{ systemd_timer_name }} Timer | Create check script'
+  template:
+    src: 'check.sh.j2'
+    dest: '{{ systemd_timer_consul_check_path }}'
+    mode: 0755
+
+- name: Create Consul service definition
+  include_role: name=consul-service
+  vars:
+    consul_config_name: '{{ systemd_timer_consul_service_id }}'
+    consul_services:
+      - id:   '{{ systemd_timer_consul_service_id }}'
+        name: '{{ systemd_timer_consul_service_name }}'
+        tags: '{{ systemd_timer_consul_tags }}'
+        meta: '{{ systemd_timer_consul_meta }}'
+        address: '{{ systemd_timer_consul_address }}'
+        checks:
+          - id: '{{ systemd_timer_consul_service_id }}-check'
+            name: 'Systemd Timer Healthcheck'
+            type: 'script'
+            script: '{{ systemd_timer_consul_check_path }} {{ systemd_timer_name }}'
