@@ -1,6 +1,6 @@
 [Unit]
 Description={{ systemd_timer_description }}
-Documentation=https://github.com/status-im/infra-role-systemd-timer
+Documentation={{ systemd_timer_documentation }}
 Requires={{ systemd_timer_requires }}
 {% if systemd_timer_requires_extra is defined and systemd_timer_requires_extra != "" %}
 Requires={{ systemd_timer_requires_extra }}

@@ -13,6 +13,7 @@ systemd_timer_requires: 'multi-user.target'
 #systemd_timer_after_extra:
 systemd_timer_type: 'oneshot'
 systemd_timer_description: 'Timer creates by Ansible role.'
+systemd_timer_documentation: 'https://github.com/status-im/infra-role-systemd-timer'
 systemd_timer_enabled: true
 systemd_timer_start_on_creation: true
 systemd_timer_timeout_sec: 60
@@ -33,10 +34,19 @@ systemd_timer_consul_service_id: '{{ systemd_timer_consul_service_name }}'
 systemd_timer_consul_check_path: '/usr/local/bin/check-timer-status.sh'
 systemd_timer_consul_address: '{{ ansible_local.wireguard.vpn_ip }}'
 systemd_timer_consul_warning: false
-systemd_timer_consul_default_tags: ['timer']
+
+# Tags
 systemd_timer_consul_extra_tags: []
-systemd_timer_consul_tags: '{{ systemd_timer_consul_default_tags + systemd_timer_consul_extra_tags }}'
-systemd_timer_consul_meta:
+systemd_timer_consul_default_tags: ['timer']
+systemd_timer_consul_tags: |
+  {{ systemd_timer_consul_default_tags + systemd_timer_consul_extra_tags }}
+
+# Meta
+systemd_timer_consul_extra_meta: {}
+systemd_timer_consul_default_meta:
   description: '{{ systemd_timer_description }}'
+  documentation: '{{ systemd_timer_documentation }}'
   frequency: '{{ systemd_timer_frequency }}'
   script: '{{ systemd_timer_script_path }}'
+systemd_timer_consul_meta: |
+  {{ systemd_timer_consul_default_meta | combine(systemd_timer_consul_extra_meta) }}
