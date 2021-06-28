@@ -17,3 +17,4 @@
   assert:
     that: systemd_timer_script.stat.exists
     fail_msg: 'Script file for timer does not exist!'
+    quiet: true
