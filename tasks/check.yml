@@ -18,5 +18,6 @@
         checks:
           - id: '{{ systemd_timer_consul_service_id }}-check'
             name: 'Systemd Timer Healthcheck'
+            notes: '{{ systemd_timer_description }}'
             type: 'script'
             script: '{{ systemd_timer_consul_check_path }} {{ systemd_timer_name }}'
