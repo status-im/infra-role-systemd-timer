@@ -20,4 +20,7 @@
             name: 'Systemd Timer Healthcheck'
             notes: '{{ systemd_timer_description }}'
             type: 'script'
-            script: '{{ systemd_timer_consul_check_path }} {{ systemd_timer_name }}'
+            script: >-
+              {{ systemd_timer_consul_check_path }}
+              {{ systemd_timer_name }}
+              {{ systemd_timer_enabled | ternary("ACTIVE", "DISABLED") }}

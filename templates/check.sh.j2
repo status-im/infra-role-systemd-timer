@@ -2,28 +2,31 @@
 # vim: ft=bash
 
 NAME="${1}"
-if [[ -z "${NAME}" ]]; then
-    echo "No timer name provided!"
-    exit 1
-fi
+EXP_TIMER_STATUS="${2:-ACTIVE}"
+[[ -z "${NAME}" ]]   && { echo "No timer name provided!"; exit 1; }
+[[ -z "${EXP_TIMER_STATUS}" ]] && { echo "No expected timer status provided!"; exit 1; }
 
 function is-active() { systemctl is-active $@ > /dev/null; }
 function is-failed() { systemctl is-failed $@ > /dev/null; }
 function list-timer() { systemctl --no-pager -q -all list-timers $@; }
 function status() { systemctl --no-pager -q status $@; }
+function print() { echo; list-timer "${NAME}.timer"; echo; status "${NAME}.service"; }
+function success() { exit 0; }
+function warning() { exit 1; }
+function failure() { exit 2; }
 
 TIMER_STATUS=$(is-active ${NAME}.timer && echo "ACTIVE" || echo "DISABLED")
-TIMER_HEALTH=$(is-failed ${NAME}.timer && echo "BROKEN" || echo "HEALTHY")
-SERVICE_HEALTH=$(is-failed ${NAME}.service && echo "FAILED" || echo "RUNNING")
+TIMER_HEALTH=$(is-failed ${NAME}.timer && echo "FAILED" || echo "HEALTHY")
+SERVICE_STATUS=$(is-failed ${NAME}.service && echo "ACTIVE" || echo "DISABLEd")
+SERVICE_HEALTH=$(is-failed ${NAME}.service && echo "FAILED" || echo "HEALTHY")
 
-echo "${NAME}.timer: ${TIMER_STATUS}, ${TIMER_HEALTH}, and ${SERVICE_HEALTH}"
+echo "${NAME}.timer: ${TIMER_STATUS} and ${TIMER_HEALTH}"
+echo "${NAME}.service: ${SERVICE_STATUS} and ${SERVICE_HEALTH}"
 
-if [[ ${TIMER_STATUS} != "ACTIVE" ]] ||
+if [[ ${TIMER_STATUS} != "${EXP_TIMER_STATUS}" ]] ||
    [[ "${TIMER_HEALTH}" != "HEALTHY" ]] || 
-   [[ "${SERVICE_HEALTH}" != "RUNNING" ]] ;then
-    echo
-    list-timer "${NAME}.timer"
-    echo
-    status "${NAME}.service"
-    exit {{ systemd_timer_consul_warning | ternary(1, 2) }}
+   [[ ${TIMER_STATUS} != "ACTIVE" ]] ||
+   [[ "${SERVICE_HEALTH}" != "HEALTHY" ]] ;then
+    print
+    {{ systemd_timer_consul_warning | ternary("warning", "failure") }}
 fi
