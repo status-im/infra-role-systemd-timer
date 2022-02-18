@@ -21,7 +21,7 @@
 - name: '{{ systemd_timer_name }} Timer | (Re)start service'
   service:
     name: '{{ systemd_timer_name }}.service'
-    state: '{{ systemd_timer_start_on_creation | ternary("started", "stopped") }}'
+    state: '{{ systemd_timer_start_on_creation | ternary("started", omit) }}'
     enabled: true
 
 - name: '{{ systemd_timer_name }} Timer | Enable the timer'
