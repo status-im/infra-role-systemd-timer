@@ -24,6 +24,8 @@ WorkingDirectory={{ systemd_timer_work_dir }}
 {% for key, val in systemd_timer_environment.items() %}
 Environment="{{ key }}={{ val }}"
 {% endfor %}
+{% if systemd_timer_start_on_boot %}
 
 [Install]
-WantedBy=timers.target
+WantedBy=multi-user.target
+{% endif %}
