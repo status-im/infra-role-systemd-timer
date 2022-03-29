@@ -26,6 +26,7 @@ systemd_timer_ionice_class: 'best-effort'
 # Options: minutely, hourly, daily, monthly, weekly, yearly
 # https://www.freedesktop.org/software/systemd/man/systemd.time.html
 systemd_timer_frequency: 'daily'
+systemd_timer_random_delay_sec: 0
 systemd_timer_environment: {}
 # PATH: "/special/path"
 
