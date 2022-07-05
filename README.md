@@ -20,9 +20,14 @@ systemd_timer_script_content: |
   #!/usr/bin/env bash
   echo "My Timer Script!"
 ```
-
 The `frequency` accepts [systemd time specification](https://www.freedesktop.org/software/systemd/man/systemd.time.html#) format.
 
+Automatic restarts with limited retries can also be configured:
+```yml
+systemd_timer_restart: 'on-failure'
+systemd_timer_restart_delay: 60
+systemd_timer_restart_retries: 5
+```
 You can also customize the Consul service definition:
 ```
 systemd_timer_consul_service_id: 'my-test-abc'

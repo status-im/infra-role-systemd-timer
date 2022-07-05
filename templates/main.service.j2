@@ -9,6 +9,10 @@ After={{ systemd_timer_requires }}
 {% if systemd_timer_after_extra is defined and systemd_timer_after_extra != "" %}
 After={{ systemd_timer_after_extra }}
 {% endif %}
+{% if systemd_timer_restart != "no" %}
+StartLimitBurst={{ systemd_timer_restart_retries }}
+StartLimitInterval={{ (systemd_timer_restart_retries * systemd_timer_restart_delay) + 30 }}
+{% endif %}
 
 [Service]
 User={{ systemd_timer_user }}
@@ -20,6 +24,10 @@ IOSchedulingPriority={{ systemd_timer_ionice_priority }}
 ExecStart={{ systemd_timer_script_path }} {{ systemd_timer_script_args }}
 TimeoutStartSec={{ systemd_timer_timeout_sec }}
 WorkingDirectory={{ systemd_timer_work_dir }}
+Restart={{ systemd_timer_restart }}
+{% if systemd_timer_restart != "no" %}
+RestartSec={{ systemd_timer_restart_delay }}
+{% endif %}
 
 {% for key, val in systemd_timer_environment.items() %}
 Environment="{{ key }}={{ val }}"

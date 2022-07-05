@@ -19,6 +19,10 @@ systemd_timer_start_on_boot: false
 systemd_timer_start_on_creation: true
 systemd_timer_timeout_sec: 60
 systemd_timer_work_dir: '/'
+# Restart options: no, always, on-success, on-failure, on-abnormal, on-abort, on-watchdog
+systemd_timer_restart: 'no'
+systemd_timer_restart_delay: 30
+systemd_timer_restart_retries: 3
 # Lower priority for process and IO to not disrupt other processes.
 systemd_timer_nice_priority: 19
 systemd_timer_ionice_priority: 7
