@@ -2,9 +2,11 @@
 After=multi-user.target
 
 [Timer]
-OnCalendar={{ systemd_timer_frequency }}
-RandomizedDelaySec={{ systemd_timer_random_delay_sec }}
 Persistent=yes
+OnCalendar={{ systemd_timer_frequency }}
+{% if systemd_timer_random_delay_sec != 0 %}
+RandomizedDelaySec={{ systemd_timer_random_delay_sec }}
+{% endif %}
 
 [Install]
 WantedBy=timers.target
