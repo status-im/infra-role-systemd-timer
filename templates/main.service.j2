@@ -15,8 +15,12 @@ StartLimitInterval={{ (systemd_timer_restart_retries * systemd_timer_restart_del
 {% endif %}
 
 [Service]
+{% if systemd_timer_dynamic_user %}
+DynamicUser=yes
+{% else %}
 User={{ systemd_timer_user }}
 Group={{ systemd_timer_group }}
+{% endif %}
 Type={{ systemd_timer_type }}
 Nice={{ systemd_timer_nice_priority }}
 IOSchedulingClass={{ systemd_timer_ionice_class }}

@@ -22,6 +22,13 @@ systemd_timer_script_content: |
 ```
 The `frequency` accepts [systemd time specification](https://www.freedesktop.org/software/systemd/man/systemd.time.html#) format.
 
+## Service User
+
+By default `nobody` is used, but a [dynamic user](https://0pointer.net/blog/dynamic-users-with-systemd.html) is a more secure option:
+```
+systemd_timer_dynamic_user: yes
+```
+
 ## State Directory
 
 A state directory in `/var/lib` can be created using:
