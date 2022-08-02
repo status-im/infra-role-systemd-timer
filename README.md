@@ -22,12 +22,27 @@ systemd_timer_script_content: |
 ```
 The `frequency` accepts [systemd time specification](https://www.freedesktop.org/software/systemd/man/systemd.time.html#) format.
 
+## State Directory
+
+A state directory in `/var/lib` can be created using:
+```yml
+systemd_timer_state_dir_create: false
+systemd_timer_state_dir: '{{ systemd_timer_name }}'
+systemd_timer_state_dir_perms: 0750
+```
+Which will be named same as the timer itself.
+
+## Automatic Restarts
+
 Automatic restarts with limited retries can also be configured:
 ```yml
 systemd_timer_restart: 'on-failure'
 systemd_timer_restart_delay: 60
 systemd_timer_restart_retries: 5
 ```
+
+## Consul Metadata
+
 You can also customize the Consul service definition:
 ```
 systemd_timer_consul_service_id: 'my-test-abc'

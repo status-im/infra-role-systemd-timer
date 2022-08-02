@@ -24,6 +24,10 @@ IOSchedulingPriority={{ systemd_timer_ionice_priority }}
 ExecStart={{ systemd_timer_script_path }} {{ systemd_timer_script_args }}
 TimeoutStartSec={{ systemd_timer_timeout_sec }}
 WorkingDirectory={{ systemd_timer_work_dir }}
+{% if systemd_timer_state_dir_create %}
+StateDirectory={{ systemd_timer_state_dir }}
+StateDirectoryMode={{ systemd_timer_state_dir_perms }}
+{% endif %}
 Restart={{ systemd_timer_restart }}
 {% if systemd_timer_restart != "no" %}
 RestartSec={{ systemd_timer_restart_delay }}
