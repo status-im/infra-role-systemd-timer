@@ -25,7 +25,13 @@ Type={{ systemd_timer_type }}
 Nice={{ systemd_timer_nice_priority }}
 IOSchedulingClass={{ systemd_timer_ionice_class }}
 IOSchedulingPriority={{ systemd_timer_ionice_priority }}
+{% for action in systemd_timer_exec_start_pre %}
+ExecStartPre={{ action | mandatory }}
+{% endfor %}
 ExecStart={{ systemd_timer_script_path }} {{ systemd_timer_script_args }}
+{% for action in systemd_timer_exec_start_post %}
+ExecStartPost={{ action | mandatory }}
+{% endfor %}
 TimeoutStartSec={{ systemd_timer_timeout_sec }}
 WorkingDirectory={{ systemd_timer_work_dir }}
 {% if systemd_timer_state_dir_create %}

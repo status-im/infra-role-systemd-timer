@@ -3,6 +3,8 @@ systemd_timer_name: ~
 systemd_timer_script_content: ~
 systemd_timer_script_path: '/usr/local/bin/{{ systemd_timer_name | mandatory }}'
 systemd_timer_script_args: ''
+systemd_timer_exec_start_pre: []
+systemd_timer_exec_start_post: []
 systemd_timer_service_path: '/etc/systemd/system'
 systemd_timer_service_owner: 'root'
 systemd_timer_service_group: 'root'
