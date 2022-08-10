@@ -22,5 +22,6 @@
             type: 'script'
             script: >-
               {{ systemd_timer_consul_check_path }}
-              {{ systemd_timer_name }}
-              {{ systemd_timer_enabled | ternary("ACTIVE", "DISABLED") }}
+              {%- if systemd_timer_consul_warning %} --warning{% endif %}
+              {%- if not systemd_timer_enabled %} --disabled{% endif %}
+              --name={{ systemd_timer_name }}

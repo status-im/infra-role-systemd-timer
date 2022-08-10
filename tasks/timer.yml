@@ -25,7 +25,7 @@
     enabled: true
 
 - name: '{{ systemd_timer_name }} Timer | Enable the timer'
-  systemd:
+  service:
     name: '{{ systemd_timer_name }}.timer'
     state: '{{ systemd_timer_enabled | ternary("started", "stopped") }}'
     enabled: '{{ systemd_timer_enabled }}'
