@@ -9,6 +9,9 @@ After={{ systemd_timer_requires }}
 {% if systemd_timer_after_extra is defined and systemd_timer_after_extra != "" %}
 After={{ systemd_timer_after_extra }}
 {% endif %}
+{% if systemd_timer_unit_conflicts is defined and systemd_timer_unit_conflicts != "" %}
+Conflicts={{ systemd_timer_unit_conflicts }}
+{% endif %}
 {% if systemd_timer_restart != "no" %}
 StartLimitBurst={{ systemd_timer_restart_retries }}
 StartLimitInterval={{ (systemd_timer_restart_retries * systemd_timer_restart_delay) + 30 }}
