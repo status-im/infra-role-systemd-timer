@@ -6,7 +6,6 @@
     owner: '{{ systemd_timer_user }}'
     group: adm
     mode: 0710
-  when: systemd_timer_script_content is not none
 
 - name: '{{ systemd_timer_name }} Timer | Stat script file'
   stat:
