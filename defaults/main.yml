@@ -29,6 +29,7 @@ systemd_timer_state_dir: '{{ systemd_timer_name }}'
 systemd_timer_state_dir_perms: '0750'
 # Restart options: no, always, on-success, on-failure, on-abnormal, on-abort, on-watchdog
 systemd_timer_restart: 'no'
+systemd_timer_restart_mode: 'normal'
 systemd_timer_restart_delay: 30
 systemd_timer_restart_retries: 3
 # Lower priority for process and IO to not disrupt other processes.
