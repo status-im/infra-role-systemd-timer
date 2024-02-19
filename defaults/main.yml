@@ -22,7 +22,7 @@ systemd_timer_documentation: 'https://github.com/status-im/infra-role-systemd-ti
 systemd_timer_enabled: true
 systemd_timer_start_on_boot: false
 systemd_timer_start_on_creation: true
-systemd_timer_timeout_sec: 60
+systemd_timer_timeout_sec: 300
 systemd_timer_work_dir: '/'
 systemd_timer_state_dir_create: false
 systemd_timer_state_dir: '{{ systemd_timer_name }}'
@@ -49,7 +49,13 @@ systemd_timer_consul_service_id: '{{ systemd_timer_consul_service_name }}'
 systemd_timer_consul_check_path: '/usr/local/bin/check-timer-status.sh'
 systemd_timer_consul_address: '{{ ansible_local.wireguard.vpn_ip }}'
 systemd_timer_consul_warning: false
-
+systemd_timer_consul_success_before_passing: 0
+systemd_timer_consul_check_interval: 30
+# Default value if the Timer doesn't restart else value based on the timeout divided by consul interval check
+systemd_timer_failure_success_before_warning: '{{ 1 if systemd_timer_restart == "no" else (systemd_timer_timeout_sec / systemd_timer_consul_check_interval ) | int  }}'
+systemd_timer_duration_with_restarts: '{{ (systemd_timer_restart_retries * (systemd_timer_restart_delay + systemd_timer_timeout_sec)) }}'
+# Default value if the Timer doesn't restart else value based on the number of restart and delays by consul interval check
+systemd_timer_failure_success_before_critical: '{{ 2 if systemd_timer_restart == "no" else ( systemd_timer_duration_with_restarts | int / systemd_timer_consul_check_interval ) |int  }}'
 # Tags
 systemd_timer_consul_extra_tags: []
 systemd_timer_consul_default_tags: ['timer']
