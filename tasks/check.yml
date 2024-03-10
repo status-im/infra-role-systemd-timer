@@ -28,4 +28,4 @@
               {{ systemd_timer_consul_check_path }}
               {%- if systemd_timer_consul_warning %} --warning{% endif %}
               {%- if not systemd_timer_enabled %} --disabled{% endif %}
-              --name=infra-role-{{ systemd_timer_name }}
+              --name={{ systemd_timer_name }}
