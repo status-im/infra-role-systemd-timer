@@ -6,7 +6,7 @@
     mode: 0755
 
 - name: Create Consul service definition
-  include_role: name=consul-service
+  include_role: name=infra-role-consul-service
   vars:
     consul_config_name: '{{ systemd_timer_consul_service_id }}'
     consul_default_success_before_passing:   '{{ systemd_timer_consul_success_before_passing }}'
@@ -28,4 +28,4 @@
               {{ systemd_timer_consul_check_path }}
               {%- if systemd_timer_consul_warning %} --warning{% endif %}
               {%- if not systemd_timer_enabled %} --disabled{% endif %}
-              --name={{ systemd_timer_name }}
+              --name=infra-role-{{ systemd_timer_name }}
