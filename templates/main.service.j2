@@ -46,7 +46,6 @@ StateDirectoryMode={{ systemd_timer_state_dir_perms }}
 {% endif %}
 Restart={{ systemd_timer_restart }}
 {% if systemd_timer_restart != "no" %}
-RestartMode={{ systemd_timer_restart_mode }}
 RestartSec={{ systemd_timer_restart_delay }}
 {% endif %}
 
