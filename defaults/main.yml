@@ -51,10 +51,10 @@ systemd_timer_consul_warning: false
 systemd_timer_consul_success_before_passing: 0
 systemd_timer_consul_check_interval: 30
 # Default value if the Timer doesn't restart else value based on the timeout divided by consul interval check
-systemd_timer_failure_success_before_warning: '{{ 1 if systemd_timer_restart == "no" else (systemd_timer_timeout_sec / systemd_timer_consul_check_interval ) | int  }}'
-systemd_timer_duration_with_restarts: '{{ ( systemd_timer_restart_retries | int * (systemd_timer_restart_delay | int + systemd_timer_timeout_sec | int )) }}'
+systemd_timer_failure_success_before_warning: '{{ 1 if systemd_timer_restart == "no" else (systemd_timer_timeout_sec|int / systemd_timer_consul_check_interval|int ) | int  }}'
+systemd_timer_duration_with_restarts: '{{ ( systemd_timer_restart_retries|int * (systemd_timer_restart_delay|int + systemd_timer_timeout_sec|int )) }}'
 # Default value if the Timer doesn't restart else value based on the number of restart and delays by consul interval check
-systemd_timer_failure_success_before_critical: '{{ 2 if systemd_timer_restart == "no" else ( systemd_timer_duration_with_restarts | int / systemd_timer_consul_check_interval ) | int  }}'
+systemd_timer_failure_success_before_critical: '{{ 2 if systemd_timer_restart == "no" else ( systemd_timer_duration_with_restarts|int / systemd_timer_consul_check_interval|int ) | int  }}'
 # Tags
 systemd_timer_consul_extra_tags: []
 systemd_timer_consul_default_tags: ['timer']
