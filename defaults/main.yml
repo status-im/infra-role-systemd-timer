@@ -43,7 +43,7 @@ systemd_timer_environment: {}
 # PATH: "/special/path"
 
 # Consul service and check
-systemd_timer_consul_service_name: '{{ systemd_timer_name }}-timer'
+systemd_timer_consul_service_name: '{{ systemd_timer_name }}.timer'
 systemd_timer_consul_service_id: '{{ systemd_timer_consul_service_name }}'
 systemd_timer_consul_check_path: '/usr/local/bin/check-timer-status.sh'
 systemd_timer_consul_address: '{{ ansible_local.wireguard.vpn_ip }}'
