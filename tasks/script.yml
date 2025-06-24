@@ -1,5 +1,5 @@
 ---
-- name: '{{ systemd_timer_name }} Timer | Create script file' 
+- name: '{{ systemd_timer_name }} Timer | Create script file'
   copy:
     dest: '{{ systemd_timer_script_path }}'
     content: '{{ systemd_timer_script_content }}'

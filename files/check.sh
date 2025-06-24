@@ -47,7 +47,7 @@ if [[ "${TIMER_SWITCH}" != "${SWITCH}" ]]; then
         warning
     fi
 fi
-if [[ "${TIMER_HEALTH}"   != "HEALTHY" ]] || 
+if [[ "${TIMER_HEALTH}"   != "HEALTHY" ]] ||
    [[ "${SERVICE_HEALTH}" != "HEALTHY" ]] ;then
     print
     if [[ "${WARNING}" == 1 ]]; then warning; else failure; fi

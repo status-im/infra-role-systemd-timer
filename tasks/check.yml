@@ -1,7 +1,7 @@
 ---
 - name: '{{ systemd_timer_name }} Timer | Create check script'
-  template:
-    src: 'check.sh.j2'
+  copy:
+    src:  'check.sh'
     dest: '{{ systemd_timer_consul_check_path }}'
     mode: 0755
 
