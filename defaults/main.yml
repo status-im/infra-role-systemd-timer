@@ -31,6 +31,8 @@ systemd_timer_state_dir_perms: '0750'
 systemd_timer_restart: 'no'
 systemd_timer_restart_delay: 30
 systemd_timer_restart_retries: 3
+# WARNING: This does not take into account timer schedule that is more frequent than restarts
+systemd_timer_restart_limit_sec: '{{ (systemd_timer_restart_retries|int * systemd_timer_timeout_sec|int) + 60 }}'
 # Lower priority for process and IO to not disrupt other processes.
 systemd_timer_nice_priority: 19
 systemd_timer_ionice_priority: 7

@@ -14,7 +14,7 @@ Conflicts={{ systemd_timer_unit_conflicts }}
 {% endif %}
 {% if systemd_timer_restart != "no" %}
 StartLimitBurst={{ systemd_timer_restart_retries }}
-StartLimitIntervalSec={{ (systemd_timer_restart_retries|int * systemd_timer_timeout_sec|int) + 60 }}
+StartLimitIntervalSec={{ systemd_timer_restart_limit_sec }}
 {% endif %}
 
 [Service]
