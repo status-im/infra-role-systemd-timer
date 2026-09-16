@@ -59,6 +59,14 @@ systemd_timer_consul_meta: { my_meta: 'metadata' }
 ```
 The service runs the [`check.sh`](templates/check.sh.j2) script to verify timer health..
 
+## Conflicting Service
+
+To stop conflicting service before run and restart after finishing:
+
+```yaml
+systemd_timer_unit_conflicts: 'some.service'
+```
+
 # Usage
 
 The the timer starts the service with configured frequency.
